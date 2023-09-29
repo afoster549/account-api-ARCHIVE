@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            width: calc(100% - 8px);
+        }
+    </style>
+</head>
+<body>
+    <p>Sign Up</p>
+    <input type="text" placeholder="Username" id="signup-username-feild">
+    <br>
+    <input type="email" placeholder="Email" id="signup-email-feild">
+    <br>
+    <input type="text" placeholder="Password" id="signup-password-feild">
+    <br>
+    <br>
+    <button id="signup-button">Sign Up</button>
+    <br>
+    <br>
+    <p>Login</p>
+    <input type="text" placeholder="Username" id="login-username-feild">
+    <br>
+    <input type="text" placeholder="Password" id="login-password-feild">
+    <br>
+    <br>
+    <button id="login-button">Login</button>
+    <br>
+    <br>
+    <p>Forgot Password</p>
+    <input type="text" placeholder="Email" id="forgot-password-email-feild">
+    <br>
+    <br>
+    <button id="forgot-password-send-button">Send Email</button>
+    <br>
+    <br>
+    <p>Change password</p>
+    <input type="text" placeholder="Code" id="forgot-password-code-feild">
+    <br>
+    <input type="text" placeholder="Password" id="forgot-password-new-password-feild">
+    <br>
+    <br>
+    <button id="forgot-password-confirm-button">Confirm</button>
+    <br>
+    <br>
+    <p>Auth</p>
+    <input type="text" placeholder="Token" id="auth-token-feild">
+    <br>
+    <input type="text" placeholder="SessionID" id="auth-sessionid-feild">
+    <br>
+    <br>
+    <button id="auth-button">Auth</button>
+    <script>
+        // Sign Up
+
+        const domain = "localhost:8080"
+
+        const signup_username_feild = document.getElementById("signup-username-feild")
+        const signup_email_feild = document.getElementById("signup-email-feild")
+        const signup_password_feild = document.getElementById("signup-password-feild")
+
+        const signup_button = document.getElementById("signup-button")
+
+        signup_button.addEventListener("click", function() {
+            const xhr = new XMLHttpRequest()
+
+            xhr.open("POST", `http://${domain}/v1/register`)
+            xhr.setRequestHeader("Accept", "application/json")
+            xhr.setRequestHeader("Content-Type", "application/json")
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.status)
+                    console.log(xhr.responseText)
+                }
+            }
+
+            const data = `{
+                "username": "${signup_username_feild.value}",
+                "email": "${signup_email_feild.value}",
+                "password": "${signup_password_feild.value}"
+            }`
+
+            xhr.send(data)
+        })
+
+        // Login
+
+        let os = "Unknown"
+        let browser = "Unknown"
+
+        if (navigator.userAgent.indexOf("Win") != - 1) {
+            os = "Windows"
+        } else if (navigator.userAgent.indexOf("Mac") != - 1) {
+            os = "MacOS"
+        } else if (navigator.userAgent.indexOf("X11") != - 1) {
+            os = "UNIX"
+        } else if (navigator.userAgent.indexOf("Linux") != - 1) {
+            os = "Linux"
+        } else if (navigator.userAgent.indexOf("Android") != - 1) {
+            os = "Android"
+        } else if (navigator.userAgent.indexOf("like mac") != - 1) {
+            os = "iOS"
+        }
+
+        if (navigator.userAgent.indexOf("Edg") != - 1) {
+            browser = "Edge"
+        } else if (navigator.userAgent.indexOf("MSIE") != - 1) {
+            browser = "Internet Explorer"
+        } else if (navigator.userAgent.indexOf("Firefox") != - 1) {
+            browser = "Firefox"
+        } else if (navigator.userAgent.indexOf("OP") != - 1) {
+            browser = "Opera"
+        } else if (navigator.userAgent.indexOf("Safari") != - 1) {
+            browser = "Safari"
+        } else if (navigator.userAgent.indexOf("Chrome") != - 1) {
+            browser = "Chrome"
+        }
+
+        const login_username_feild = document.getElementById("login-username-feild")
+        const login_password_feild = document.getElementById("login-password-feild")
+
+        const login_button = document.getElementById("login-button")
+
+        login_button.addEventListener("click", function() {
+            const xhr = new XMLHttpRequest()
+
+            xhr.open("POST", `http://${domain}/v1/login`)
+            xhr.setRequestHeader("Accept", "application/json")
+            xhr.setRequestHeader("Content-Type", "application/json")
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.status)
+                    console.log(xhr.responseText)
+                }
+            }
+
+            const data = `{
+                "username": "${login_username_feild.value}",
+                "password": "${login_password_feild.value}",
+                "os": "${os}",
+                "platform": "${browser}"
+            }`
+
+            xhr.send(data)
+        })
+
+        // Reset password
+
+        const reset_password_email_feild = document.getElementById("forgot-password-email-feild")
+
+        const send_reset_password_button = document.getElementById("forgot-password-send-button")
+
+        const reset_password_code_feild = document.getElementById("forgot-password-code-feild")
+        const reset_password_password_feild = document.getElementById("forgot-password-new-password-feild")
+
+        const confirm_reset_password_button = document.getElementById("forgot-password-confirm-button")
+
+        send_reset_password_button.addEventListener("click", function() {
+            const xhr = new XMLHttpRequest()
+
+            xhr.open("POST", `http://${domain}/v1/sendresetlink`)
+            xhr.setRequestHeader("Accept", "application/json")
+            xhr.setRequestHeader("Content-Type", "application/json")
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.status)
+                    console.log(xhr.responseText)
+                }
+            }
+
+            const data = `{
+                "email": "${reset_password_email_feild.value}"
+            }`
+
+            xhr.send(data)
+        })
+
+        confirm_reset_password_button.addEventListener("click", function() {
+            const xhr = new XMLHttpRequest()
+
+            xhr.open("POST", `http://${domain}/v1/resetpassword`)
+            xhr.setRequestHeader("Accept", "application/json")
+            xhr.setRequestHeader("Content-Type", "application/json")
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.status)
+                    console.log(xhr.responseText)
+                }
+            }
+
+            const data = `{
+                "resetId": "${reset_password_code_feild.value}",
+                "newPassword": "${reset_password_password_feild.value}"
+            }`
+
+            xhr.send(data)
+        })
+
+        // Auth
+
+        const auth_token_feild = document.getElementById("auth-token-feild")
+        const auth_session_id_feild = document.getElementById("auth-sessionid-feild")
+
+        const auth_button = document.getElementById("auth-button")
+
+        auth_button.addEventListener("click", function() {
+            const xhr = new XMLHttpRequest()
+
+            xhr.open("POST", `http://${domain}/v1/auth`)
+            xhr.setRequestHeader("Accept", "application/json")
+            xhr.setRequestHeader("Content-Type", "application/json")
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.status)
+                    console.log(xhr.responseText)
+                }
+            }
+
+            const data = `{
+                "token": "${auth_token_feild.value}",
+                "session": "${auth_session_id_feild.value}",
+                "send_data": "true"
+            }`
+
+            xhr.send(data)
+        })
+    </script>
+</body>
+</html>
