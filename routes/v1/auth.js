@@ -4,7 +4,7 @@ const router = express.Router()
 const user_model = require("../../models/user")
 
 router.post("/", async (req, res) => {
-    if (typeof(req.body.token) === "undefined" || typeof(req.body.session) === "undefined") {
+    if (typeof(req.body.token) === "string" || typeof(req.body.session) != "string") {
         res.status(406).json({
             error: "No token or session provided"
         })
@@ -25,8 +25,6 @@ router.post("/", async (req, res) => {
                     delete sessions[req.body.session]
 
                     data.sessions = JSON.stringify(sessions)
-
-                    console.log(sessions)
 
                     data.save()
 
