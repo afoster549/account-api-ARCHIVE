@@ -1,3 +1,6 @@
+const dotenv = require("dotenv")
+dotenv.config()
+
 const express = require("express")
 const router = express.Router()
 
@@ -27,7 +30,7 @@ router.post("/", async (req, res) => {
             service: "gmail",
             auth: {
                 user: "123game.info@gmail.com",
-                pass: "fezvbrghjjkvchih"
+                pass: process.env.emailpassword
             },
             tls: {
                 rejectUnauthorized: false
@@ -47,10 +50,9 @@ router.post("/", async (req, res) => {
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
             </head>
             <body>
-                <p>You can reset you're password <a href="https://accounts.123game.dev/resetpassword/?r=${passwordResetId}">here</a>. If you didn't request this then you can safely ignore this email.</p>
+                <p>You can reset you're password <a href="https://accounts.123game.dev/resetpassword/?r=${passwordResetId}">here</a>. If you didn't request this then you can safely ignore this email. Originated from ${req.headers["x-forwarded-for"] || req.socket.remoteAddress}</p>
             </body>
             </html>`
         }
