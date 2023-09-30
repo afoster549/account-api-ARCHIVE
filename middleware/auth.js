@@ -6,8 +6,9 @@ const auth = async function(req, res, next) {
 
         if (data) {
             const sessions = JSON.parse(data.sessions)
+            const session = sessions[req.body.session]
 
-            if (sessions[req.body.session]) {
+            if (session) {
                 if (session.expires <= Date.now()) {
                     const sessions = JSON.parse(data.sessions)
 
