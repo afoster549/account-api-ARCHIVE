@@ -6,7 +6,7 @@ const user_model = require("../../models/user")
 router.post("/", async (req, res) => {
     if (typeof(req.body.token) === "string" || typeof(req.body.session) != "string") {
         res.status(406).json({
-            error: "No token or session provided"
+            error: "No token or session provided."
         })
     } else {
         const data  = await user_model.findOne({ token: req.body.token })
@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 
             if (typeof(session) === "undefined") {
                 res.status(500).json({
-                    error: "Something went wrong"
+                    error: "Something went wrong."
                 })
             } else {
                 if (session.expires <= Date.now()) {
@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
                     data.save()
 
                     res.status(401).send({
-                        error: "Session expired"
+                        error: "Session expired."
                     })
                 } else {
                     const reqIp = req.headers["x-forwarded-for"] || req.socket.remoteAddress
@@ -63,7 +63,7 @@ router.post("/", async (req, res) => {
             }
         } else {
             res.status(500).json({
-                error: "Something went wrong"
+                error: "Something went wrong."
             })
         }
     }
