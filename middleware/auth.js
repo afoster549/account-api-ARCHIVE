@@ -19,24 +19,24 @@ const auth = async function(req, res, next) {
                     data.save()
 
                     res.status(401).send({
-                        error: "Session expired"
+                        error: "Session expired."
                     })
                 } else {
                     next()
                 }
             } else {
                 res.status(401).send({
-                    error: "Not authenticated"
+                    error: "Not authenticated."
                 })
             }
         } else {
             res.status(500).send({
-                error: "Something went wrong"
+                error: "Something went wrong."
             })
         }
     } else {
         res.status(400).send({
-            error: "Malformed request"
+            error: "Malformed request."
         })
     }
 }
