@@ -25,9 +25,9 @@ function gen_token() {
 
 function validate_password(password) {
     if (password.length <= 8) {
-        return "Password must be at least 8 characters long"
+        return "Password must be at least 8 characters long."
     } else if (password.length >= 150) {
-        return "Password cannot be longer than 150 characters"
+        return "Password cannot be longer than 150 characters."
     }
 
     return null
@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
     try {
         if (typeof(req.body.username) === "undefined" || typeof(req.body.password) === "undefined" || typeof(req.body.email) === "undefined") {
             res.status(400).json({
-                error: "Invalid JSON format"
+                error: "Invalid JSON format."
             })
         } else {
             let errors = {}
@@ -81,7 +81,7 @@ router.post("/", async (req, res) => {
                         doc.save()
     
                         res.status(201).json({
-                            message: "Account created"
+                            message: "Account created."
                         })
                     } else {
                         res.status(400).json({
@@ -91,13 +91,13 @@ router.post("/", async (req, res) => {
                 }
             } catch {
                 res.status(500).json({
-                    error: "Something went wrong"
+                    error: "Something went wrong."
                 })
             }
         }
     } catch {
         res.status(500).json({
-            error: "Something went wrong"
+            error: "Something went wrong."
         })
     }
 })
