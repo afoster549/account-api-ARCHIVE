@@ -6,7 +6,7 @@ const user_model = require("../../models/user")
 router.post("/", async (req, res) => {
     if (typeof(req.body.resetId) === "undefined") {
         res.status(406).json({
-            error: "No Id"
+            error: "No Id."
         })
     } else {
         const user = await user_model.findOne({ resetId: req.body.resetId })
@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
             })
         } else {
             res.status(406).json({
-                error: "Invalid Id"
+                error: "Invalid Id."
             })
         }
     }
