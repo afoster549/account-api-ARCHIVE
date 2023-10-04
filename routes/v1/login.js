@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     try {
         if (typeof(req.body.username) != "string" || typeof(req.body.password) != "string" || req.body.username.length === 0 || req.body.password.length === 0 || typeof(req.body.os) != "string" || typeof(req.body.platform) != "string") {
             res.status(406).json({
-                error: "Missing data"
+                error: "Missing data."
             })
         } else {
             const user = await user_model.findOne({ username: req.body.username })
@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
 
                         if (Object.keys(sessions).length >= 10) {
                             res.status(406).send({
-                                message: "Too many sessions"
+                                message: "Too many sessions."
                             })
                         } else {
                             const sessionId = gen_sessionid()
@@ -60,7 +60,7 @@ router.post("/", async (req, res) => {
                         }
                     } else {
                         res.status(406).json({
-                            error: "Incorrect information"
+                            error: "Incorrect information."
                         })
                     }
                 } catch {
@@ -70,13 +70,13 @@ router.post("/", async (req, res) => {
                 }
             } else {
                 res.status(404).json({
-                    message: "User not found"
+                    message: "User not found."
                 })
             }
         }
     } catch {
         res.status(500).json({
-            message: "Something went wrong"
+            message: "Something went wrong."
         })
     }
 })
