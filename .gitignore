@@ -129,6 +129,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# db.env
-db.env
+# .env
 .env
