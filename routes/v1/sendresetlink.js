@@ -27,9 +27,9 @@ router.post("/", async (req, res) => {
         })
     } else {
         let transporter = nodemailer.createTransport({
-            service: "gmail",
+            service: "yahoo",
             auth: {
-                user: "123game.info@gmail.com",
+                user: "noreply@afoster.uk",
                 pass: process.env.emailpassword
             },
             tls: {
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
         const passwordResetId = gen_password_reset_id()
 
         const mail_config = {
-            from: "123game.info@gmail.com",
+            from: "noreply@afoster.uk",
             to: req.body.email,
             subject: "Password reset",
             html:
