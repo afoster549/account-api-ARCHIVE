@@ -23,7 +23,7 @@ function gen_password_reset_id() {
 router.post("/", async (req, res) => {
     if (typeof(req.body.email) === "undefined") {
         res.status(406).json({
-            error: "No email provided"
+            error: "No email provided."
         })
     } else {
         let transporter = nodemailer.createTransport({
@@ -64,7 +64,7 @@ router.post("/", async (req, res) => {
                 if (error) {
                     console.log(error)
                     res.status(500).json({
-                        error: "Something went wrong"
+                        error: "Something went wrong."
                     })
                 } else {
                     user.resetId = passwordResetId
@@ -75,7 +75,7 @@ router.post("/", async (req, res) => {
         }
 
         res.status(200).json({
-            message: "An email will be sent if an account was found"
+            message: "An email will be sent if an account was found."
         })
     }
 })
