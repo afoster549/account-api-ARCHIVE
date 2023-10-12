@@ -6,14 +6,14 @@ const mongoose = require("mongoose")
 const express = require("express")
 const app = express()
 
-const { rateLimit } = require("express-rate-limit")
+// const { rateLimit } = require("express-rate-limit")
 
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    limit: 100,
-    standardHeaders: "draft-7",
-    legacyHeaders: false
-})
+// const limiter = rateLimit({
+//     windowMs: 15 * 60 * 1000,
+//     limit: 100,
+//     standardHeaders: "draft-7",
+//     legacyHeaders: false
+// })
 
 const cors = require("cors")
 
@@ -36,38 +36,38 @@ app.get("/", (req, res) => {
 
 // Register
 
-const register_route = require("./routes/v1/register")
-app.use("/v1/register", register_route)
+const register_route = require("./routes/v1/accounts/register")
+app.use("/v1/accounts/register", register_route)
 
 // Login
 
-const login_route = require("./routes/v1/login")
-app.use("/v1/login", login_route)
+const login_route = require("./routes/v1/accounts/login")
+app.use("/v1/accounts/login", login_route)
 
 // Auth
 
-const auth_route = require("./routes/v1/auth")
-app.use("/v1/auth", auth_route)
+const auth_route = require("./routes/v1/accounts/auth")
+app.use("/v1/accounts/auth", auth_route)
 
 // Gen Password Reset Link
 
-const send_password_reset_link_route = require("./routes/v1/sendresetlink")
-app.use("/v1/sendresetlink", send_password_reset_link_route)
+const send_password_reset_link_route = require("./routes/v1/accounts/sendresetlink")
+app.use("/v1/accounts/sendresetlink", send_password_reset_link_route)
 
 // Get Password Reset Link
 
-const get_password_reset_link_route = require("./routes/v1/getresetlink")
-app.use("/v1/getpasswordresetlink", get_password_reset_link_route)
+const get_password_reset_link_route = require("./routes/v1/accounts/getresetlink")
+app.use("/v1/accounts/getpasswordresetlink", get_password_reset_link_route)
 
 // Reset Password
 
-const reset_password_route = require("./routes/v1/resetpassword")
-app.use("/v1/resetpassword", reset_password_route)
+const reset_password_route = require("./routes/v1/accounts/resetpassword")
+app.use("/v1/accounts/resetpassword", reset_password_route)
 
 // Sessions 
 
-const sessions_route = require("./routes/v1/sessions")
-app.use("/v1/sessions", sessions_route)
+const sessions_route = require("./routes/v1/accounts/sessions")
+app.use("/v1/accounts/sessions", sessions_route)
 
 app.listen(port, () => {
     console.log(`Listening on port ${port} • http://localhost:${port}`)
