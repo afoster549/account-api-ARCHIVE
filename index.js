@@ -64,7 +64,7 @@ app.use("/v1/accounts/getpasswordresetlink", get_password_reset_link_route)
 const reset_password_route = require("./routes/v1/accounts/resetpassword")
 app.use("/v1/accounts/resetpassword", reset_password_route)
 
-// Sessions 
+// Sessions [auth protected]
 
 const sessions_route = require("./routes/v1/accounts/sessions")
 app.use("/v1/accounts/sessions", sessions_route)
