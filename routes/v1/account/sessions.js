@@ -8,13 +8,19 @@ router.use(auth_mid)
 
 router.post("/", async (req, res) => {
     try {
-        const data  = await user_model.findOne({ token: req.body.token })
+        if (typeof(req.body.token) === "undefined") {
+            res.status(406).json({
+                error: "No token provided."
+            })
+        } else {
+            const data  = await user_model.findOne({ token: req.body.token })
 
-        const sessions = JSON.parse(data.sessions)
+            const sessions = JSON.parse(data.sessions)
 
-        res.status(200).json({
-            data: sessions
-        })
+            res.status(200).json({
+                data: sessions
+            })
+        }
     } catch {
         res.status(500).json({
             message: "Something went wrong."
