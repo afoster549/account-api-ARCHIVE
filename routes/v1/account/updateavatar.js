@@ -10,23 +10,29 @@ router.post("/", async (req, res) => {
                 error: "No token, session or avatar url provided."
             })
         } else {
-            const data = await user_model.findOne({ token: req.body.token })
-
-            const sessions = JSON.parse(data.sessions)
-
-            if (sessions[req.body.session]) {
-                data.avatarUrl = req.body.avatarUrl
-
-                data.save()
-            } else {
-                res.status(500).json({
-                    message: "Something went wrong."
+            if (!req.body.avatarUrl.startsWith("https://cdn.afoster.uk/images/users/avatar/")) {
+                res.status(400).json({
+                    message: "Invalid Url."
                 })
-            }
+            } else {
+                const data = await user_model.findOne({ token: req.body.token })
 
-            res.status(200).json({
-                data: "Updated avatar."
-            })
+                const sessions = JSON.parse(data.sessions)
+    
+                if (sessions[req.body.session]) {
+                    data.avatarUrl = req.body.avatarUrl
+    
+                    data.save()
+                } else {
+                    res.status(500).json({
+                        message: "Something went wrong."
+                    })
+                }
+    
+                res.status(200).json({
+                    data: "Updated avatar."
+                }) 
+            }
         }
     } catch {
         res.status(500).json({
