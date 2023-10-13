@@ -69,6 +69,11 @@ app.use("/v1/accounts/resetpassword", reset_password_route)
 const sessions_route = require("./routes/v1/accounts/sessions")
 app.use("/v1/accounts/sessions", sessions_route)
 
+// Profile
+
+const profile_route = require("./routes/v1/users/profile")
+app.use("/v1/users/profile", profile_route)
+
 app.listen(port, () => {
     console.log(`Listening on port ${port} • http://localhost:${port}`)
 })
