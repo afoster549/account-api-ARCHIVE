@@ -5,9 +5,9 @@ const user_model = require("../../models/user")
 
 router.post("/", async (req, res) => {
     try {
-        if (typeof(req.body.token) === "undefined" && typeof(req.body.session) === "undefined" && typeof(req.body.avatarUrl) === "undefined") {
+        if (typeof(req.body.token) === "undefined" || typeof(req.body.session) === "undefined" || typeof(req.body.avatarUrl) === "undefined") {
             res.status(406).json({
-                error: "No token or session provided."
+                error: "No token, session or avatar url provided."
             })
         } else {
             const data = await user_model.findOne({ token: req.body.token })
@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
             }
 
             res.status(200).json({
-                data: "Updated avatar"
+                data: "Updated avatar."
             })
         }
     } catch {
