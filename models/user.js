@@ -70,6 +70,11 @@ const user_schema = new schema({
         },
         minlength: 5
     },
+    avatarUrl: {
+        type: String,
+        required: false,
+        default: "https://cdn.afoster.uk/images/users/avatar/defualt.png"
+    },
     regip: {
         type: String,
         required: false
