@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
         } else {
             if (!req.body.avatarUrl.startsWith("https://cdn.afoster.uk/images/users/avatar/")) {
                 res.status(400).json({
-                    message: "Invalid Url."
+                    message: "Invalid Avatar Url."
                 })
             } else {
                 const data = await user_model.findOne({ token: req.body.token })
