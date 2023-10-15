@@ -22,7 +22,8 @@ router.post("/", async (req, res) => {
                 data: {
                     nickname: user.nickname,
                     username: user.username,
-                    badges: user.badges
+                    badges: user.badges,
+                    avatarUrl: user.avatarUrl
                 }
             })
         }
