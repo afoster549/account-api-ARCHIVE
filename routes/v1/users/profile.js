@@ -5,7 +5,7 @@ const user_model = require("../../models/user")
 
 router.post("/", async (req, res) => {
     try {
-        if (typeof(req.body.userId) === "undefined" && typeof(req.body.username) === "undefined") {
+        if (typeof(req.body.userId) != "number" && typeof(req.body.username) != "string") {
             res.status(406).json({
                 error: "No id or username provided."
             })
