@@ -75,7 +75,7 @@ router.post("/", async (req, res) => {
         }
 
         res.status(200).json({
-            message: "An email will be sent if an account was found."
+            error: "An email will be sent if an account was found."
         })
     }
 })
