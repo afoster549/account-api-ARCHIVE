@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
         if (user) {
             res.status(200).json({
                 username: user.username,
-                picon: "https://static.123game.dev/instant-messenger/images/defaultProfileIcon.png"
+                picon: "https://cdn.afoster.uk/images/users/avatar/defualt.png"
             })
         } else {
             res.status(406).json({
