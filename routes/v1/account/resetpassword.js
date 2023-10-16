@@ -16,7 +16,7 @@ function validate_password(password) {
 }
 
 router.post("/", async (req, res) => {
-    if (typeof(req.body.resetId) === "undefined" || typeof(req.body.newPassword) === "undefined") {
+    if (typeof(req.body.resetId) != "string" || typeof(req.body.newPassword) != "string") {
         res.status(406).json({
             error: "No reset ID or password provided."
         })

@@ -35,7 +35,7 @@ function validate_password(password) {
 
 router.post("/", async (req, res) => {
     try {
-        if (typeof(req.body.username) === "undefined" || typeof(req.body.password) === "undefined" || typeof(req.body.email) === "undefined") {
+        if (typeof(req.body.username) != "string" || typeof(req.body.password) != "string" || typeof(req.body.email) != "string") {
             res.status(400).json({
                 error: "Invalid JSON format."
             })

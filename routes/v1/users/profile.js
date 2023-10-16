@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
         } else {
             let user
 
-            if (typeof(req.body.username) === "undefined") {
+            if (typeof(req.body.username) != "string") {
                 user = await user_model.findOne({ lower_username: req.body.username.toLowerCase() })
             } else {
                 user = await user_model.findOne({ id: req.body.id.toLowerCase() })

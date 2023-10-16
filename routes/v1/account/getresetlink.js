@@ -4,7 +4,7 @@ const router = express.Router()
 const user_model = require("../../models/user")
 
 router.post("/", async (req, res) => {
-    if (typeof(req.body.resetId) === "undefined") {
+    if (typeof(req.body.resetId) != "string") {
         res.status(406).json({
             error: "No Id."
         })

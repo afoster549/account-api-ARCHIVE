@@ -4,7 +4,7 @@ const router = express.Router()
 const user_model = require("../../models/user")
 
 router.post("/", async (req, res) => {
-    if (typeof(req.body.token) === "string" || typeof(req.body.session) != "string") {
+    if (typeof(req.body.token) != "string" || typeof(req.body.session) != "string") {
         res.status(406).json({
             error: "No token or session provided."
         })

@@ -8,7 +8,7 @@ router.use(auth_mid)
 
 router.post("/", async (req, res) => {
     try {
-        if (typeof(req.body.token) === "undefined") {
+        if (typeof(req.body.token) != "string") {
             res.status(406).json({
                 error: "No token provided."
             })

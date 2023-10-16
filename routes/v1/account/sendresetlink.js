@@ -21,7 +21,7 @@ function gen_password_reset_id() {
 }
 
 router.post("/", async (req, res) => {
-    if (typeof(req.body.email) === "undefined") {
+    if (typeof(req.body.email) != "string") {
         res.status(406).json({
             error: "No email provided."
         })

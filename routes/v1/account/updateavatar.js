@@ -5,7 +5,7 @@ const user_model = require("../../models/user")
 
 router.post("/", async (req, res) => {
     try {
-        if (typeof(req.body.token) === "undefined" || typeof(req.body.session) === "undefined" || typeof(req.body.avatarUrl) === "undefined") {
+        if (typeof(req.body.token) != "string" || typeof(req.body.session) != "string" || typeof(req.body.avatarUrl) != "string") {
             res.status(406).json({
                 error: "No token, session or avatar url provided."
             })
