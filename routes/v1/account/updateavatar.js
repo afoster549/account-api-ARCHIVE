@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
         } else {
             if (!req.body.avatarUrl.startsWith("https://cdn.afoster.uk/images/users/avatar/")) {
                 res.status(400).json({
-                    message: "Invalid Avatar Url."
+                    error: "Invalid Avatar Url."
                 })
             } else {
                 const data = await user_model.findOne({ token: req.body.token })
@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
                     data.save()
                 } else {
                     res.status(500).json({
-                        message: "Something went wrong."
+                        error: "Something went wrong."
                     })
                 }
     
@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
         }
     } catch {
         res.status(500).json({
-            message: "Something went wrong."
+            error: "Something went wrong."
         })
     }
 })
