@@ -3,6 +3,10 @@ const router = express.Router()
 
 const user_model = require("../../models/user")
 
+const validation = require("../../../middleware/validation")
+
+router.use()
+
 router.post("/", async (req, res) => {
     try {
         if (typeof(req.body.userId) != "number" && typeof(req.body.username) != "string") {

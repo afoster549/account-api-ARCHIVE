@@ -6,7 +6,7 @@ const router = express.Router()
 
 const nodemailer = require("nodemailer")
 
-const user_model = require("../../models/user")
+const user_model = require("../../../models/user")
 
 const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 

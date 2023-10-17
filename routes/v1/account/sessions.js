@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router()
-const auth_mid = require("../../middleware/auth")
+const auth_mid = require("../../../middleware/auth")
 
-const user_model = require("../../models/user")
+const user_model = require("../../../models/user")
 
 router.use(auth_mid)
 

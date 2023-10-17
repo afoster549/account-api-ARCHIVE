@@ -3,7 +3,7 @@ const router = express.Router()
 
 const bcrypt = require("bcrypt")
 
-const user_model = require("../../models/user")
+const user_model = require("../../../models/user")
 
 function validate_password(password) {
     if (password.length <= 8) {
