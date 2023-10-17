@@ -71,7 +71,7 @@ app.use("/v1/account/sessions", sessions_route)
 
 // Profile
 
-const profile_route = require("./routes/v1/user/profile")
+const profile_route = require("./routes/v1/users/profile")
 app.use("/v1/users/profile", profile_route)
 
 app.listen(port, () => {
