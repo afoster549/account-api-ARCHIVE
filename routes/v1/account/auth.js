@@ -57,7 +57,7 @@ router.post("/", async (req, res) => {
                         })
                     }
 
-                    if (req.body.send_data === true) {
+                    if (req.body.senddata === true) {
                         res.status(200).json({
                             data: {
                                 userid: data.userId,
