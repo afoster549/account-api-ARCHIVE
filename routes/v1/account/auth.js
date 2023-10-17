@@ -3,12 +3,21 @@ const router = express.Router()
 
 const user_model = require("../../../models/user")
 
+const validation = require("../../../middleware/validation")
+
+router.use(
+    validation({
+        "token": {
+            type: "string"
+        },
+        "session": {
+            type: "string"
+        }
+    }, false)
+)
+
 router.post("/", async (req, res) => {
-    if (typeof(req.body.token) != "string" || typeof(req.body.session) != "string") {
-        res.status(406).json({
-            error: "No token or session provided."
-        })
-    } else {
+    try {
         const data  = await user_model.findOne({ token: req.body.token })
 
         if (data) {
@@ -66,6 +75,10 @@ router.post("/", async (req, res) => {
                 error: "Something went wrong."
             })
         }
+    } catch {
+        res.status(500).json({
+            error: "Something went wrong."
+        })
     }
 })
 
