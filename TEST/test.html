@@ -68,7 +68,7 @@
         signup_button.addEventListener("click", function() {
             const xhr = new XMLHttpRequest()
 
-            xhr.open("POST", `http://${domain}/v1/register`)
+            xhr.open("POST", `http://${domain}/v1/account/register`)
             xhr.setRequestHeader("Accept", "application/json")
             xhr.setRequestHeader("Content-Type", "application/json")
 
@@ -129,7 +129,7 @@
         login_button.addEventListener("click", function() {
             const xhr = new XMLHttpRequest()
 
-            xhr.open("POST", `http://${domain}/v1/login`)
+            xhr.open("POST", `http://${domain}/v1/account/login`)
             xhr.setRequestHeader("Accept", "application/json")
             xhr.setRequestHeader("Content-Type", "application/json")
 
@@ -164,7 +164,7 @@
         send_reset_password_button.addEventListener("click", function() {
             const xhr = new XMLHttpRequest()
 
-            xhr.open("POST", `http://${domain}/v1/sendresetlink`)
+            xhr.open("POST", `http://${domain}/v1/account/sendresetlink`)
             xhr.setRequestHeader("Accept", "application/json")
             xhr.setRequestHeader("Content-Type", "application/json")
 
@@ -185,7 +185,7 @@
         confirm_reset_password_button.addEventListener("click", function() {
             const xhr = new XMLHttpRequest()
 
-            xhr.open("POST", `http://${domain}/v1/resetpassword`)
+            xhr.open("POST", `http://${domain}/v1/account/resetpassword`)
             xhr.setRequestHeader("Accept", "application/json")
             xhr.setRequestHeader("Content-Type", "application/json")
 
@@ -197,8 +197,8 @@
             }
 
             const data = `{
-                "resetId": "${reset_password_code_feild.value}",
-                "newPassword": "${reset_password_password_feild.value}"
+                "resetid": "${reset_password_code_feild.value}",
+                "newpassword": "${reset_password_password_feild.value}"
             }`
 
             xhr.send(data)
@@ -214,7 +214,7 @@
         auth_button.addEventListener("click", function() {
             const xhr = new XMLHttpRequest()
 
-            xhr.open("POST", `http://${domain}/v1/auth`)
+            xhr.open("POST", `http://${domain}/v1/account/auth`)
             xhr.setRequestHeader("Accept", "application/json")
             xhr.setRequestHeader("Content-Type", "application/json")
 
@@ -228,7 +228,7 @@
             const data = `{
                 "token": "${auth_token_feild.value}",
                 "session": "${auth_session_id_feild.value}",
-                "send_data": "true"
+                "senddata": true
             }`
 
             xhr.send(data)
