@@ -3,12 +3,18 @@ const router = express.Router()
 
 const user_model = require("../../../models/user")
 
+const validation = require("../../../middleware/validation")
+
+router.use(
+    validation({
+        "resetid": {
+            type: "string"
+        }
+    }, false)
+)
+
 router.post("/", async (req, res) => {
-    if (typeof(req.body.resetId) != "string") {
-        res.status(406).json({
-            error: "No Id."
-        })
-    } else {
+    try {
         const user = await user_model.findOne({ resetId: req.body.resetId })
 
         if (user) {
@@ -21,6 +27,10 @@ router.post("/", async (req, res) => {
                 error: "Invalid Id."
             })
         }
+    } catch {
+        res.status(500).json({
+            error: "Something went wrong."
+        })
     }
 })
 
