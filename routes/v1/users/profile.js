@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 
-const user_model = require("../../models/user")
+const user_model = require("../../../models/user")
 
 const validation = require("../../../middleware/validation")
 
