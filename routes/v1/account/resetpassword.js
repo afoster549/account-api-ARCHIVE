@@ -5,6 +5,19 @@ const bcrypt = require("bcrypt")
 
 const user_model = require("../../../models/user")
 
+const validation = require("../../../middleware/validation")
+
+router.use(
+    validation({
+        "resetid": {
+            type: "string"
+        },
+        "newpassword": {
+            type: "string"
+        }
+    }, false)
+)
+
 function validate_password(password) {
     if (password.length <= 8) {
         return "Password must be at least 8 characters long."
@@ -16,11 +29,7 @@ function validate_password(password) {
 }
 
 router.post("/", async (req, res) => {
-    if (typeof(req.body.resetId) != "string" || typeof(req.body.newPassword) != "string") {
-        res.status(406).json({
-            error: "No reset ID or password provided."
-        })
-    } else {
+    try {
         let errors = {}
 
         const user = await user_model.findOne({ resetId: req.body.resetId })
@@ -54,6 +63,10 @@ router.post("/", async (req, res) => {
                 })
             }
         }
+    } catch {
+        res.status(500).json({
+            error: "Something went wrong."
+        })
     }
 })
 
