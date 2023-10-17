@@ -8,6 +8,16 @@ const nodemailer = require("nodemailer")
 
 const user_model = require("../../../models/user")
 
+const validation = require("../../../middleware/validation")
+
+router.use(
+    validation({
+        "email": {
+            type: "string"
+        }
+    }, false)
+)
+
 const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
 function gen_password_reset_id() {
@@ -21,11 +31,7 @@ function gen_password_reset_id() {
 }
 
 router.post("/", async (req, res) => {
-    if (typeof(req.body.email) != "string") {
-        res.status(406).json({
-            error: "No email provided."
-        })
-    } else {
+    try {
         let transporter = nodemailer.createTransport({
             service: "yahoo",
             auth: {
@@ -76,6 +82,10 @@ router.post("/", async (req, res) => {
 
         res.status(200).json({
             error: "An email will be sent if an account was found."
+        })
+    } catch {
+        res.status(500).json({
+            error: "Something went wrong."
         })
     }
 })
