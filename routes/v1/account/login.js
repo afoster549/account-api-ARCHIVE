@@ -5,6 +5,28 @@ const bcrypt = require("bcrypt")
 
 const user_model = require("../../../models/user")
 
+const validation = require("../../../middleware/validation")
+
+router.use(
+    validation({
+        "username": {
+            type: "string"
+        },
+        "password": {
+            type: "string"
+        },
+        "email": {
+            type: "string"
+        },
+        "os": {
+            type: "string"
+        },
+        "platform": {
+            type: "string"
+        }
+    }, false)
+)
+
 const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
 function gen_sessionid() {
@@ -59,7 +81,7 @@ router.post("/", async (req, res) => {
                             })
                         }
                     } else {
-                        res.status(406).json({
+                        res.status(422).json({
                             error: "Incorrect information."
                         })
                     }
