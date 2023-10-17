@@ -10,6 +10,9 @@ router.use(
     validation({
         "token": {
             type: "string"
+        },
+        "session": {
+            type: "string"
         }
     }, false)
 )
