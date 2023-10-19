@@ -1,9 +1,10 @@
 const express = require("express")
 const router = express.Router()
+const auth_mid = require("../../../middleware/auth")
 
-const user_model = require("../../../models/user")
+const user_model = require("../../../../models/user")
 
-const validation = require("../../../middleware/validation")
+const validation = require("../../../../middleware/validation")
 
 router.use(
     validation({
@@ -19,6 +20,8 @@ router.use(
     }, false)
 )
 
+router.use(auth_mid)
+
 router.post("/", async (req, res) => {
     try {
         if (!req.body.avatarUrl.startsWith("https://cdn.afoster.uk/images/users/avatar/")) {
@@ -28,17 +31,9 @@ router.post("/", async (req, res) => {
         } else {
             const data = await user_model.findOne({ token: req.body.token })
 
-            const sessions = JSON.parse(data.sessions)
+            data.avatarUrl = req.body.avatarUrl
 
-            if (sessions[req.body.session]) {
-                data.avatarUrl = req.body.avatarUrl
-
-                data.save()
-            } else {
-                res.status(500).json({
-                    error: "Something went wrong."
-                })
-            }
+            data.save()
 
             res.status(200).json({
                 data: "Updated avatar."
