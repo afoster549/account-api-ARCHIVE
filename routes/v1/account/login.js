@@ -81,7 +81,7 @@ router.post("/", async (req, res) => {
                             })
                         }
                     } else {
-                        res.status(422).json({
+                        res.status(401).json({
                             error: "Incorrect information."
                         })
                     }
