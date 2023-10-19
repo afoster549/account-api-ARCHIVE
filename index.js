@@ -74,6 +74,11 @@ app.use("/v1/account/sessions", sessions_route)
 const profile_route = require("./routes/v1/users/profile")
 app.use("/v1/users/profile", profile_route)
 
+// Search
+
+const search_route = require("./routes/v1/users/search")
+app.use("/v1/users/search", search_route)
+
 app.listen(port, () => {
     console.log(`Listening on port ${port} • http://localhost:${port}`)
 })
