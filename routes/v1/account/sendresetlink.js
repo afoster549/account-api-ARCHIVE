@@ -69,6 +69,7 @@ router.post("/", async (req, res) => {
             transporter.sendMail(mail_config, (error, info) => {
                 if (error) {
                     console.log(error)
+                    
                     res.status(500).json({
                         error: "Something went wrong."
                     })
@@ -76,13 +77,13 @@ router.post("/", async (req, res) => {
                     user.resetId = passwordResetId
 
                     user.save()
+
+                    res.status(200).json({
+                        message: "An email will be sent if an account was found."
+                    })
                 }
             })
         }
-
-        res.status(200).json({
-            message: "An email will be sent if an account was found."
-        })
     } catch {
         res.status(500).json({
             error: "Something went wrong."
