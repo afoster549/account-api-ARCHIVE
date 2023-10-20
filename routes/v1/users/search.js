@@ -3,25 +3,16 @@ const router = express.Router()
 
 const user_model = require("../../../models/user")
 
-const validation = require("../../../middleware/validation")
-
-router.use(
-    validation({
-        "query": {
-            type: "string"
-        }
-    }, true)
-)
-
-router.post("/", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
-        const data = await user_model.find({ "username": {"$regex": `^${req.body.query}`} }).setLimit(10)
+        const data = await user_model.find({ "lower_username": {"$regex": `^${req.query.username.toLowerCase()}`} }).limit(10)
 
         if (data) {
             let stripedData = []
 
             data.forEach(user => {
                 stripedData.push({
+                    id: user.userId,
                     username: user.username,
                     nickname: user.nickname,
                     avatarUrl: user.avatarUrl
