@@ -3,25 +3,12 @@ const router = express.Router()
 
 const user_model = require("../../../models/user")
 
-const validation = require("../../../middleware/validation")
-
-router.use(
-    validation({
-        "userid": {
-            type: "number"
-        },
-        "username": {
-            type: "string"
-        }
-    }, true)
-)
-
-router.post("/", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
-        if (typeof (req.body.username) === "string") {
-            user = await user_model.findOne({ lower_username: req.body.username.toLowerCase() })
-        } else {
-            user = await user_model.findOne({ userId: req.body.userid })
+        if (typeof (req.query.username) === "string") {
+            user = await user_model.findOne({ username: req.query.username })
+        } else if (req.query.userid) {
+            user = await user_model.findOne({ userId: req.query.userid })
         }
 
         if (user) {
