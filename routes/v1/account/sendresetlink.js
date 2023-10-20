@@ -58,7 +58,7 @@ router.post("/", async (req, res) => {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             </head>
             <body>
-                <p>A password reset has been rquested for you're account. You can reset you're password <a href="https://accounts.123game.dev/resetpassword/?r=${passwordResetId}">here</a>. If you didn't request this then you can safely ignore this email. Originated from ${req.headers["x-forwarded-for"] || req.socket.remoteAddress}</p>
+                <p>A password reset has been requested for you're account. You can reset you're password <a href="https://accounts.123game.dev/resetpassword/?r=${passwordResetId}">here</a>. If you didn't request this then you can safely ignore this email. Originated from ${req.headers["x-forwarded-for"] || req.socket.remoteAddress}</p>
             </body>
             </html>`
         }
@@ -69,7 +69,7 @@ router.post("/", async (req, res) => {
             transporter.sendMail(mail_config, (error, info) => {
                 if (error) {
                     console.log(error)
-                    
+
                     res.status(500).json({
                         error: "Something went wrong."
                     })
