@@ -66,7 +66,7 @@ router.post("/", async (req, res) => {
         const user = await user_model.findOne({ email: req.body.email })
 
         if (user) {
-            transporter.sendMail(mail_config, (error, info) => {
+            transporter.sendMail(mail_config, (error) => {
                 if (error) {
                     console.log(error)
 
