@@ -14,7 +14,7 @@ router.use(
 )
 
 router.post("/", async (req, res) => {
-    // try {
+    try {
         const data = await user_model.find({ "username": {"$regex": `^${req.body.query}`} }).setLimit(10)
 
         if (data) {
@@ -36,11 +36,11 @@ router.post("/", async (req, res) => {
                 message: "No users found."
             })
         }
-    // } catch {
-    //     res.status(500).json({
-    //         error: "Something went wrong."
-    //     })
-    // }
+    } catch {
+        res.status(500).json({
+            error: "Something went wrong."
+        })
+    }
 })
 
 module.exports = router
