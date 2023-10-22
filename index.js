@@ -84,11 +84,6 @@ app.use("/v1/account/profile/updatenickname", updatenickname_route)
 const updateusername_route = require("./routes/v1/account/profile/updateusername")
 app.use("/v1/account/profile/updateusername", updateusername_route)
 
-// Update Avatar [auth protected]
-
-const updateavatar_route = require("./routes/v1/account/profile/updateavatar")
-app.use("/v1/account/profile/updateavatar", updateavatar_route)
-
 // Profile
 
 const profile_route = require("./routes/v1/users/profile")
