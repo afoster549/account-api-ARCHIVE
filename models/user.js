@@ -16,16 +16,16 @@ const user_schema = new schema({
         minlength: [2, "Username must be at least 2 charcters long."],
         maxlength: [15, "Username cannot be longer than 15 characters."],
         validate: {
-            validator: function(v) {
+            validator: function (v) {
                 const validRegex = /^[a-zA-Z0-9_]*$/
 
                 if (v.match(validRegex)) {
                     let valid = true
                     let total = 0
 
-                    for (let i = 0; i < v.length; i ++) {
+                    for (let i = 0; i < v.length; i++) {
                         if (v[i] === "_" && total < 1 && i > 0 && i < v.length - 1) {
-                            total ++
+                            total++
                         } else if (v[i] === "_" && (total > 0 || (i === 0 || i === v.length - 1))) {
                             valid = false
                         }
@@ -57,9 +57,9 @@ const user_schema = new schema({
         type: String,
         required: [true, "Email required."],
         validate: {
-            validator: function(v) {
+            validator: function (v) {
                 const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-                
+
                 if (v.match(validRegex)) {
                     return true
                 } else {
