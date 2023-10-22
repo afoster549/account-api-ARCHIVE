@@ -41,7 +41,32 @@ const user_schema = new schema({
     },
     lower_username: {
         type: String,
-        required: false
+        required: false,
+        minlength: [2, "Username must be at least 2 charcters long."],
+        maxlength: [15, "Username cannot be longer than 15 characters."],
+        validate: {
+            validator: function (v) {
+                const validRegex = /^[a-zA-Z0-9_ ]*$/
+
+                if (v.match(validRegex)) {
+                    let valid = true
+                    let total = 0
+
+                    for (let i = 0; i < v.length; i++) {
+                        if (v[i] === "_" && total < 1 && i > 0 && i < v.length - 1) {
+                            total++
+                        } else if (v[i] === "_" && (total > 0 || (i === 0 || i === v.length - 1))) {
+                            valid = false
+                        }
+                    }
+
+                    return valid
+                } else {
+                    return false
+                }
+            },
+            message: "Nickname can only contain letters a-z, numbers 0-9, spaces and underscores."
+        }
     },
     nickname: {
         type: String,
