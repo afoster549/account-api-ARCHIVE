@@ -15,9 +15,6 @@ router.use(
         "password": {
             type: "string"
         },
-        "email": {
-            type: "string"
-        },
         "os": {
             type: "string"
         },
