@@ -11,7 +11,7 @@ const validate = (data, any) => {
             if (typeof(req.body[item]) != data[item].type) {
                 validated = false
             } else {
-                correct++
+                correct ++
             }
         }
 
