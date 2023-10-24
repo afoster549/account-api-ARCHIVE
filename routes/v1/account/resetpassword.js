@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
                 user.save()
 
                 res.status(200).json({
-                    error: "Password changed."
+                    message: "Password changed."
                 })
             } else {
                  res.status(500).json({
