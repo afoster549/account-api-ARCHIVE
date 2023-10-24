@@ -13,9 +13,6 @@ router.use(
         },
         "session": {
             type: "string"
-        },
-        "logout": {
-            type: "string"
         }
     }, false)
 )
@@ -28,16 +25,15 @@ router.post("/", async (req, res) => {
 
         const sessions = JSON.parse(data.sessions)
 
-        if (sessions[req.body.logout]) {
-            sessions.remove(req.body.logout)
-        }
+        const newSessions = {}
+        newSessions[req.body.session] = sessions[req.body.session]
 
-        data.sessions = JSON.stringify(sessions)
+        data.sessions = JSON.stringify(newSessions)
 
         data.save()
 
         res.status(200).json({
-            message: "Session signed out."
+            message: "Sessions signed out."
         })
     } catch {
         res.status(500).json({
