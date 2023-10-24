@@ -84,6 +84,16 @@ app.use("/v1/account/profile/updatenickname", updatenickname_route)
 const updateusername_route = require("./routes/v1/account/profile/updateusername")
 app.use("/v1/account/profile/updateusername", updateusername_route)
 
+// Sign out other session [auth protected]
+
+const signoutsession_route = require("./routes/v1/account/signoutsession")
+app.use("/v1/account/profile/signoutsession", signoutsession_route)
+
+// Sign out all other sessions [auth protected]
+
+const signoutothersessions_route = require("./routes/v1/account/signoutothersessions")
+app.use("/v1/account/profile/signoutothersessions", signoutothersessions_route)
+
 // Profile
 
 const profile_route = require("./routes/v1/users/profile")
