@@ -26,7 +26,7 @@ let statusMessage = "API active"
 
 // DB
 
-mongoose.connect("mongodb+srv://Admin:TJ8JKjnFHWq1ErpK@cluster0.egz3m.mongodb.net/site?retryWrites=true&w=majority").catch(error => handleError(error))
+mongoose.connect(`mongodb+srv://Admin:${process.env.dbpassword}@cluster0.egz3m.mongodb.net/site?retryWrites=true&w=majority`).catch(error => handleError(error))
 
 // Root
 
