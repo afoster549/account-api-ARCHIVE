@@ -73,8 +73,8 @@ router.post("/", async (req, res) => {
                             user.save()
         
                             res.status(200).json({
-                                token: Buffer.from(user.token).toString("base64"),
-                                session: Buffer.from(sessionId).toString("base64")
+                                token: user.token,
+                                session: sessionId
                             })
                         }
                     } else {
