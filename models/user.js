@@ -134,6 +134,10 @@ const user_schema = new schema({
         type: String,
         required: false,
         default: ""
+    },
+    resetIdValidUntil: {
+        type: Number,
+        required: false
     }
 }, {
     timestamps: true
