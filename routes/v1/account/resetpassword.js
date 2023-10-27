@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
     try {
         let errors = {}
 
-        const user = await user_model.findOne({ resetId: req.body.resetId })
+        const user = await user_model.findOne({ resetId: req.body.resetid })
 
         if (user === null) {
             res.status(500).json({
@@ -43,17 +43,17 @@ router.post("/", async (req, res) => {
                 error: "Reset link expired."
             })
         } else {
-            const passwordValidation = validate_password(req.body.newPassword)
+            const passwordValidation = validate_password(req.body.newpassword)
     
             if (passwordValidation) {
                 errors.password = passwordValidation
             }
 
             if (Object.keys(errors).length === 0) {
-                const hashedPassword = await bcrypt.hash(req.body.newPassword, 10)
+                const hashedPassword = await bcrypt.hash(req.body.newpassword, 10)
 
                 user.password = hashedPassword
-                user.resetId = ""
+                user.resetid = ""
                 user.sessions = "{}"
 
                 user.save()
