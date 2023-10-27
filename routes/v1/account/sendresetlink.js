@@ -75,7 +75,7 @@ router.post("/", async (req, res) => {
                     })
                 } else {
                     user.resetId = passwordResetId
-                    user.resetIdValidUntil = Date.now() + 300
+                    user.resetIdValidUntil = Number(Date.now()) + 300000
 
                     user.save()
 
