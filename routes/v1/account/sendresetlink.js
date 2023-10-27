@@ -75,11 +75,12 @@ router.post("/", async (req, res) => {
                     })
                 } else {
                     user.resetId = passwordResetId
+                    user.resetIdValidUntil = Date.now() + 300
 
                     user.save()
 
                     res.status(200).json({
-                        message: "An email will be sent if an account was found."
+                        message: "An email will be sent if an account was found. Note: The link will only be active for  5 minutes."
                     })
                 }
             })
