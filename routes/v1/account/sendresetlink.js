@@ -80,7 +80,7 @@ router.post("/", async (req, res) => {
                     user.save()
 
                     res.status(200).json({
-                        message: "An email will be sent if an account was found. Note: The link will only be active for  5 minutes."
+                        message: "An email will be sent if an account was found. Note: The link will only be active for 5 minutes."
                     })
                 }
             })
