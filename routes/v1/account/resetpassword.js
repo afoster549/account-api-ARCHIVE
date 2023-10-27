@@ -38,6 +38,10 @@ router.post("/", async (req, res) => {
             res.status(500).json({
                 error: "Invalid Id."
             })
+        } else if (user.resetIdValidUntil > Date.now()) {
+            res.status(500).json({
+                error: "Reset link expired."
+            })
         } else {
             const passwordValidation = validate_password(req.body.newPassword)
     
