@@ -36,7 +36,7 @@ function gen_token() {
         end += characters.charAt(Math.floor(Math.random() * characters.length))
     }
 
-    return `${start}.${mid}.${end}`
+    return `${start}${mid}${end}`
 }
 
 function validate_password(password) {
