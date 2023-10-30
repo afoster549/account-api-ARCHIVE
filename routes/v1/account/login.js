@@ -89,7 +89,7 @@ router.post("/", async (req, res) => {
                 }
             } else {
                 res.status(404).json({
-                    message: "User not found."
+                    message: "Username not found."
                 })
             }
         }
