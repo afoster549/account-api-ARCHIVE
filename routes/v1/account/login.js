@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
                 try {
                     const comparison = await bcrypt.compare(req.body.password, user.password)
     
-                    if (comparison && ["Windows", "Android", "MacOS", "iOS", "Android", "Linux", "UNIX"].includes(req.body.os) && ["Edge", "Internet Explorer", "Firefox", "Opera", "Safari", "Chrome"].includes(req.body.platform)) {
+                    if (comparison && ["Windows", "Android", "MacOS", "iOS", "Linux", "UNIX"].includes(req.body.os) && ["Edge", "Internet Explorer", "Firefox", "Opera", "Safari", "Chrome"].includes(req.body.platform)) {
                         const sessions = JSON.parse(user.sessions)
 
                         if (Object.keys(sessions).length >= 10) {
