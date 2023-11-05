@@ -39,59 +39,53 @@ function gen_sessionid() {
 
 router.post("/", async (req, res) => {
     try {
-        if (typeof(req.body.username) != "string" || typeof(req.body.password) != "string" || req.body.username.length === 0 || req.body.password.length === 0 || typeof(req.body.os) != "string" || typeof(req.body.platform) != "string") {
-            res.status(406).json({
-                error: "Missing data."
-            })
-        } else {
-            const user = await user_model.findOne({ username: req.body.username })
-    
-            if (user) {
-                try {
-                    const comparison = await bcrypt.compare(req.body.password, user.password)
-    
-                    if (comparison && ["Windows", "Android", "MacOS", "iOS", "Linux", "UNIX"].includes(req.body.os) && ["Edge", "Internet Explorer", "Firefox", "Opera", "Safari", "Chrome"].includes(req.body.platform)) {
-                        const sessions = JSON.parse(user.sessions)
+        const user = await user_model.findOne({ username: req.body.username })
 
-                        if (Object.keys(sessions).length >= 10) {
-                            res.status(406).send({
-                                message: "Too many sessions."
-                            })
-                        } else {
-                            const sessionId = gen_sessionid()
+        if (user) {
+            try {
+                const comparison = await bcrypt.compare(req.body.password, user.password)
 
-                            sessions[sessionId] = {
-                                id: Object.keys(sessions).length,
-                                os: req.body.os,
-                                platform: req.body.platform,
-                                ip: req.headers["x-forwarded-for"] || req.socket.remoteAddress,
-                                login: Date.now(),
-                                expires: Date.now() + 15778458
-                            }
-        
-                            user.sessions = JSON.stringify(sessions)
-                            user.save()
-        
-                            res.status(200).json({
-                                token: user.token,
-                                session: sessionId
-                            })
-                        }
+                if (comparison && ["Windows", "Android", "MacOS", "iOS", "Linux", "UNIX"].includes(req.body.os) && ["Edge", "Internet Explorer", "Firefox", "Opera", "Safari", "Chrome"].includes(req.body.platform)) {
+                    const sessions = JSON.parse(user.sessions)
+
+                    if (Object.keys(sessions).length >= 10) {
+                        res.status(406).send({
+                            message: "Too many sessions."
+                        })
                     } else {
-                        res.status(401).json({
-                            error: "Incorrect information."
+                        const sessionId = gen_sessionid()
+
+                        sessions[sessionId] = {
+                            id: Object.keys(sessions).length,
+                            os: req.body.os,
+                            platform: req.body.platform,
+                            ip: req.headers["x-forwarded-for"] || req.socket.remoteAddress,
+                            login: Date.now(),
+                            expires: Date.now() + 15778458
+                        }
+
+                        user.sessions = JSON.stringify(sessions)
+                        user.save()
+
+                        res.status(200).json({
+                            token: user.token,
+                            session: sessionId
                         })
                     }
-                } catch {
-                    res.status(500).json({
-                        error: "Something went wrong."
+                } else {
+                    res.status(401).json({
+                        error: "Incorrect information."
                     })
                 }
-            } else {
-                res.status(404).json({
-                    error: "Username not found."
+            } catch {
+                res.status(500).json({
+                    error: "Something went wrong."
                 })
             }
+        } else {
+            res.status(404).json({
+                error: "Username not found."
+            })
         }
     } catch {
         res.status(500).json({
