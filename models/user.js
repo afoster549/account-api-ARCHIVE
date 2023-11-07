@@ -36,14 +36,14 @@ const user_schema = new schema({
                     return false
                 }
             },
-            message: "Username can only contain letters a-z, numbers 0-9 and one underscore in the middle."
+            message: "Can only have a-z, 0-9 and 1 underscore."
         }
     },
     lower_username: {
         type: String,
         required: false,
-        minlength: [2, "Username must be at least 2 charcters long."],
-        maxlength: [15, "Username cannot be longer than 15 characters."],
+        minlength: [2, "Nickname must be at least 2 charcters long."],
+        maxlength: [15, "Nickname cannot be longer than 15 characters."],
         validate: {
             validator: function (v) {
                 const validRegex = /^[a-zA-Z0-9_ ]*$/
@@ -65,7 +65,7 @@ const user_schema = new schema({
                     return false
                 }
             },
-            message: "Nickname can only contain letters a-z, numbers 0-9, spaces and underscores."
+            message: "Nickname can only contain a-z, 0-9 and underscores."
         }
     },
     nickname: {
