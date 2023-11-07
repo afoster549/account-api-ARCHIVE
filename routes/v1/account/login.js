@@ -74,7 +74,7 @@ router.post("/", async (req, res) => {
                     }
                 } else {
                     res.status(401).json({
-                        error: "Incorrect information."
+                        error: "Password or username is incorrect."
                     })
                 }
             } catch {
