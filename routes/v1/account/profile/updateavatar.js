@@ -1,3 +1,5 @@
+// To be moved to internal route
+
 const express = require("express")
 const router = express.Router()
 const auth_mid = require("../../../../middleware/auth")
