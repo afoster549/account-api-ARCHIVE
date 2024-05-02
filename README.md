@@ -52,6 +52,8 @@ router.use(
 
 ### Auth
 
+[Code](https://github.com/afoster549/web-account-api/blob/main/middleware/auth.js)
+
 Checks that a user has the correct authentication to make a request. This should be used for protected endpoints
 
 **Usage**
