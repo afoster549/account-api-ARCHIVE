@@ -6,7 +6,7 @@
 
 ## Middleware
 
-### Vaidation
+### Validation
 
 [Code](https://github.com/afoster549/web-account-api/blob/main/middleware/validation.js)
 
